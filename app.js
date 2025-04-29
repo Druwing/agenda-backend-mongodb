@@ -12,6 +12,9 @@ const logger = require('./src/utils/logger');
 
 const app = express();
 
+const mongooseUrl = process.env.MONGODB_URI_ATLAS || config.mongoose.url;
+await mongoose.connect(mongooseUrl, config.mongoose.options);
+
 // Middlewares
 app.use(cors());
 app.use(helmet());
