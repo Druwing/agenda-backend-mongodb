@@ -9,7 +9,7 @@
  ],
  "routes": [
   {
-   "src": "https://jwtauthbackend-cloud-g4c4-git-main-druwings-projects.vercel.app/",
+   "src": "/(.*)",
    "dest": "app.js"
   }
  ]
