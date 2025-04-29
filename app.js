@@ -12,9 +12,6 @@ const logger = require('./src/utils/logger');
 
 const app = express();
 
-const mongooseUrl = process.env.MONGODB_URI_ATLAS || config.mongoose.url;
-await mongoose.connect(mongooseUrl, config.mongoose.options);
-
 // Middlewares
 app.use(cors());
 app.use(helmet());
@@ -39,7 +36,7 @@ app.use(errorConverter);
 app.use(errorHandler);
 
 // Database connection
-mongoose.connect(process.env.MONGODB_URI_CLOUD, {
+mongoose.connect(process.env.MONGODB_URI_ATLAS, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       serverSelectionTimeoutMS: 30000, // 30 segundos
