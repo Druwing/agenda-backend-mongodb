@@ -36,7 +36,11 @@ app.use(errorConverter);
 app.use(errorHandler);
 
 // Database connection
-mongoose.connect(process.env.MONGODB_URI_ATLAS,config.mongoose.options);
+
+mongoose.connect(process.env.MONGODB_URI_ATLAS, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
