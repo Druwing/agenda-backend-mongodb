@@ -36,13 +36,7 @@ app.use(errorConverter);
 app.use(errorHandler);
 
 // Database connection
-mongoose.connect(process.env.MONGODB_URI_ATLAS, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      serverSelectionTimeoutMS: 30000, // 30 segundos
-      socketTimeoutMS: 45000, // 45 segundos
-      maxPoolSize: 10, // Número máximo de conexões
-    });
+mongoose.connect(process.env.MONGODB_URI_ATLAS,config.mongoose.options);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
