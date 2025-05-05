@@ -1,6 +1,6 @@
 // src/database/models/Agenda.model.js
 const mongoose = require('mongoose');
-const { toJSON } = require('./plugins');
+const toJSON = require('./plugins');
 
 const agendaSchema = mongoose.Schema(
   {
