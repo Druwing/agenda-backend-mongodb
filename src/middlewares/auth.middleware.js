@@ -1,3 +1,4 @@
+// src/middlewares/auth.middleware.js
 const jwt = require('jsonwebtoken');
 const { StatusCodes } = require('http-status-codes');
 const config = require('../config');
@@ -10,12 +11,15 @@ const auth = async (req, res, next) => {
     if (!token) {
       throw {
         statusCode: StatusCodes.UNAUTHORIZED,
-        message: 'Authentication required',
+        message: 'Authentication required'
       };
     }
 
     const decoded = jwt.verify(token, config.jwt.secret);
-    req.userId = decoded.id;
+    req.user = {
+      id: decoded.id
+    };
+
     next();
   } catch (error) {
     logger.error(`Authentication error: ${error.message}`);
@@ -24,7 +28,7 @@ const auth = async (req, res, next) => {
       return res.status(StatusCodes.UNAUTHORIZED).json({
         success: false,
         message: 'Token expired',
-        error: 'Please authenticate again',
+        error: 'Please authenticate again'
       });
     }
 
@@ -32,14 +36,14 @@ const auth = async (req, res, next) => {
       return res.status(StatusCodes.UNAUTHORIZED).json({
         success: false,
         message: 'Invalid token',
-        error: 'Please authenticate with a valid token',
+        error: 'Please authenticate with a valid token'
       });
     }
 
     res.status(error.statusCode || StatusCodes.UNAUTHORIZED).json({
       success: false,
       message: error.message || 'Authentication failed',
-      error: error.message || 'Please authenticate',
+      error: error.message || 'Please authenticate'
     });
   }
 };
