@@ -47,7 +47,14 @@ app.use((req, res, next) => {
     error: 'The requested resource was not found',
   });
 });
-
+app.use((req, res, next) => {
+  const isMobile = /Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(
+    req.headers['user-agent']
+  );
+  
+  req.isMobile = isMobile;
+  next();
+});
 // Error handling
 app.use(errorConverter);
 app.use(errorHandler);
