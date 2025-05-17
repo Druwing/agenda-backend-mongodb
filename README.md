@@ -32,7 +32,9 @@ npm install
 Crie um arquivo .env com as seguintes variáveis:
 
 MONGODB_URL_LOCAL=SuaURLMongoDB
+
 PORT=3000
+
 JWT_SECRET=suaSenhaAqui
 
 Execute o servidor:
